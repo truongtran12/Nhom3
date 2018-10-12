@@ -1,23 +1,4 @@
-<?php
-session_start();
-	include 'config.php';
-	include 'db.php';
-	$db = new Db();
-	$per_page = 5;
-	$count = $db ->countAllProducts();
-	$total = (int)$count[0]['COUNT(*)'];
-	$total_link = ceil($total/$per_page);
 
-if (isset($_GET['page'])) {
-	$page = $_GET['page'];
-}else{
-	$page = 1;
-}
-$url = $_SERVER['PHP_SELF'];
-
-$allProducts = $db -> getAllProduct($page, $per_page);
-
-?>
 <!DOCTYPE php>
 <php lang="en">
 <head>
@@ -32,20 +13,6 @@ $allProducts = $db -> getAllProduct($page, $per_page);
 	<link rel="stylesheet" href="public/css/matrix-media.css" />
 	<link href="public/font-awesome/css/font-awesome.css" rel="stylesheet" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-	<style type="text/css">
-		ul.pagination{
-			list-style: none;
-			float: right;
-		}
-		ul.pagination li.active{
-			font-weight: bold
-		}
-		ul.pagination li{
-		  float: left;
-		  display: inline-block;
-		  padding: 10px
-		}
-	</style>
 </head>
 <body>
 
@@ -105,71 +72,59 @@ $allProducts = $db -> getAllProduct($page, $per_page);
 
 	</ul>
 </div>
+
 <!-- BEGIN CONTENT -->
 <div id="content">
 	<div id="content-header">
-		<div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom current"><i class="icon-home"></i> Home</a></div>
-		<h1>Manage Products</h1>
+		<div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom current"><i class="icon-home"></i> Home</a></div>
+		<h1>Add New Product</h1>
 	</div>
 	<div class="container-fluid">
 		<hr>
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="widget-box">
-					<div class="widget-title"> <span class="icon"><a href="form.php"> <i class="icon-plus"></i> </a></span>
-						<h5>Products</h5>
+					<div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+						<h5>Product Detail</h5>
 					</div>
 					<div class="widget-content nopadding">
-						<table class="table table-bordered table-striped">
-							<thead>
-							<tr>
-								<th></th>
-								<th>Name</th>
-								<th>Category</th>
-								<th>Producer</th>
-								<th>Description</th>
-								<th>Price (VND)</th>
-								<th>Action</th>
-							</tr>
-							</thead>
-							<tbody>
-								<?php
-								
-								$allProducts = $db->getAllProduct($page,$per_page);
-								?>
-								<?php foreach ($allProducts as $key => $product) {?>
-								
-								<tr class="">
-								<td><img src='public/images/<?php echo $product['image'] ?>'>
-								<td><?php echo $product['name']; ?></td>
-								<td><?php echo $product['type_name']; ?></td>
-								<td><?php echo $product['manu_name']; ?></td>
-								<td><?php echo $product['description']; ?></td>
-								<td><?php echo $product['price']; ?></td>
-								<td>
-									<a href="form.php" class="btn btn-success btn-mini">Edit</a>
-									<a href="#" class="btn btn-danger btn-mini">Delete</a>
-								</td>
-							</tr>
-								<?php } ?>
-						</tbody>
-						</table>
 
-						<ul class="pagination">
-							<?php
-							echo ($db->createPageLinks($url, $total, $page, $per_page));
-							?>
-						</ul>
-						
+						<!-- BEGIN USER FORM -->
+						<form action="#" method="post" class="form-horizontal" enctype="multipart/form-data">
+							<div class="control-group">
+								<label class="control-label">Manufacture Name :</label>
+								<div class="controls">
+									<input type="text" class="span11" placeholder="Manufacture name" name="manu_name" /> *
+								</div>
+							</div>
+
+	
+							<div class="control-group">
+									<label class="control-label">Choose an image :</label>
+									<div class="controls">
+										<input type="file" name="fileUpload" id="fileUpload">
+									</div>
+								</div>
+	
+
+								<div class="form-actions">
+									<button type="submit" class="btn btn-success">Add</button>
+								</div>
+							</div>
+
+						</form>
+						<!-- END USER FORM -->
+
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 <!-- END CONTENT -->
 <!--Footer-part-->
-
 <div class="row-fluid">
 	<div id="footer" class="span12"> 2017 &copy; TDC - Lập trình web 1</div>
 </div>
@@ -184,4 +139,3 @@ $allProducts = $db -> getAllProduct($page, $per_page);
 <script src="public/js/matrix.tables.js"></script>
 </body>
 </php>
-

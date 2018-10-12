@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 class Db{
 	//Tạo biến $conn kết nối
 	public static $conn;
@@ -27,6 +27,14 @@ class Db{
 		return $this->getData($result);
 	}
 
+	//Goi ham munfatctures
+	public function getAllManufactures()
+	{
+		$sql = "SELECT * FROM manufactures ";
+		$result = self::$conn->query($sql);
+		return $this->getData($result);
+	}
+
 	//Ham tiem kiem san pham
 	public function seachProduct($name)
 	{
@@ -42,6 +50,8 @@ class Db{
 		$result = self::$conn->query($sql);
 		return $this->getData($result);
 	}
+
+
 	//Ham phan trang
 	public function createPageLinks($url, $total, $page, $per_page)
 	{
@@ -51,21 +61,29 @@ class Db{
 		$pre = $page - 1;
 		if($page > 1) $page = 1;
 		{
-			$next = "<a href='$url?page=$nextp' style='color:red;'> > </a>";
-			$prev = "<a href='$url?page=$pre' style='color:red;'> < </a>";
+			$next = "<a href='$url?page=$nextp' style='color:blue;'> > </a>";
+			$prev = "<a href='$url?page=$pre' style='color:blue;'> < </a>";
 
 		}
 
 
-		$fprev = "<a href='$url' style='color:red;'> << </a>";
-		$fnext = "<a href='$url?page=$total_links' style='color:red;'> >> </a>";
+		$fprev = "<a href='$url' style='color:blue;'> < </a>";
+		$fnext = "<a href='$url?page=$total_links' style='color:blue;'> > </a>";
 
 		for ($j=1; $j <= $total_links ; $j++)
 		 { 
-			$link = $link. "<a href='$url?page=$j' style='color:red;'> $j </a>";
+			$link = $link. "<a href='$url?page=$j' style='color:blue;'> $j </a>";
 			
 		}
 		return $fprev.$prev.$link.$next.$fnext;
+	}
+
+
+	//Ham them san pham
+	public function addManufacters ($manu_name, $manu_image)
+	{
+		$sql = 'INSERT INTO manufactures (manu_name, manu_img) VALUES ("'.$name.'","'.$image.'")';
+		return self::$conn->query($sql);
 	}
 }
  ?>

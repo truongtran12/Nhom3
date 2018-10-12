@@ -2,10 +2,10 @@
 -- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th10 09, 2018 lúc 04:07 AM
--- Phiên bản máy phục vụ: 5.7.21
--- Phiên bản PHP: 5.6.35
+-- Host: 127.0.0.1:3306
+-- Generation Time: Oct 12, 2018 at 03:51 AM
+-- Server version: 5.7.21
+-- PHP Version: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `nhom3`
+-- Database: `nhom3`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `manufactures`
+-- Table structure for table `manufactures`
 --
 
 DROP TABLE IF EXISTS `manufactures`;
@@ -37,20 +37,20 @@ CREATE TABLE IF NOT EXISTS `manufactures` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `manufactures`
+-- Dumping data for table `manufactures`
 --
 
 INSERT INTO `manufactures` (`manu_ID`, `manu_name`, `manu_img`) VALUES
-(1, 'Alple', 'táo-11_30_21_167.jpg'),
-(2, 'SamSung', 'logo-square-letter.png'),
-(3, 'Oppo', 'oppo-logo-BECA4F3EAB-seeklogo.com.png'),
-(4, 'Huawei', 'tải xuống (1).png'),
-(5, 'Xiaomi', '1024px-Xiaomi_logo.svg.png');
+(1, 'Alple', 'apple.jpg'),
+(2, 'SamSung', 'samsung.jpg'),
+(3, 'Oppo', 'oppo.jpg'),
+(4, 'Huawei', 'huwa.jpg'),
+(5, 'Xiaomi', 'xi.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product`
+-- Table structure for table `product`
 --
 
 DROP TABLE IF EXISTS `product`;
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`ID`, `name`, `image`, `description`, `manu_ID`, `type_ID`, `price`) VALUES
@@ -95,7 +95,7 @@ INSERT INTO `product` (`ID`, `name`, `image`, `description`, `manu_ID`, `type_ID
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `protypes`
+-- Table structure for table `protypes`
 --
 
 DROP TABLE IF EXISTS `protypes`;
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `protypes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `protypes`
+-- Dumping data for table `protypes`
 --
 
 INSERT INTO `protypes` (`type_ID`, `type_name`, `type_img`) VALUES

@@ -147,7 +147,7 @@ $allProducts = $db -> getAllProduct($page, $per_page);
 								<td><?php echo $product['description']; ?></td>
 								<td><?php echo $product['price']; ?></td>
 								<td>
-									<a href="form.php" class="btn btn-success btn-mini">Edit</a>
+									<a href="formedit.php" class="btn btn-success btn-mini">Edit</a>
 									<a href="#" class="btn btn-danger btn-mini">Delete</a>
 								</td>
 							</tr>

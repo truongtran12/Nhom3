@@ -17,7 +17,7 @@ class Db{
 		}
 		return $arr;
 	}
-	
+
 	//Hàm lấy tất cả sản phẩm
 	public function getAllProduct($page,$per_page)
 	{
@@ -77,13 +77,88 @@ class Db{
 		}
 		return $fprev.$prev.$link.$next.$fnext;
 	}
-
-
+///PRODUCT
 	//Ham them san pham
-	public function addManufacters ($manu_name, $manu_image)
+	public function addProduct ($name, $image, $description, $manu_ID, $type_ID, $price)
+	{
+		$sql = 'INSERT INTO product (name, image, description, manu_ID, type_ID, price) VALUES ("'.$name.'","'.$image.'", "'.$description.'", "'.$manu_ID.'", "'.$type_ID.'", "'.$price.'")';
+		return self::$conn->query($sql);
+	}
+	public function getProductByID($id)
+    {
+    	$sql ='SELECT * FROM product WHERE ID ="'.$id.'"';
+    	$result = self::$conn->query($sql);
+    	return $this->getData($result);
+    }
+
+    public function getProduct()
+	{
+		$sql = "SELECT * FROM product";
+		$result = self::$conn->query($sql);
+		return $this->getData($result);
+	} 
+
+	//Ham sua san pham
+	public function editProduct ($name, $image, $description, $manu_ID, $type_ID, $price)
+	{
+		$sql = 'UPDATE product SET name="'.$name.'", image= "'.$image.'", description= "'.$description.'", manu_ID= "'.$manu_ID.'", type_ID= "'.$type_ID.'", price= "'.$price.'")';
+		return self::$conn->query($sql);
+	}
+
+///MANUFACTURES
+	//Ham them trong manufactures
+	public function getManufacturesByID($id)
+    {
+    	$sql ='SELECT * FROM manufactures WHERE manu_ID ="'.$id.'"';
+    	$result = self::$conn->query($sql);
+    	return $this->getData($result);
+    }
+
+	public function addManufacters ($name, $image)
 	{
 		$sql = 'INSERT INTO manufactures (manu_name, manu_img) VALUES ("'.$name.'","'.$image.'")';
 		return self::$conn->query($sql);
 	}
+
+	public function getManufactures()
+	{
+		$sql = "SELECT * FROM manufactures";
+		$result = self::$conn->query($sql);
+		return $this->getData($result);
+	}   
+
+	public function editManufactures ($id, $name, $image)
+	{
+		$sql ='UPDATE manufactures SET name="'.$name.'", image= "'.$image.'" WHERE manu_ID="'.$id.'"';
+		return self::$conn->query($sql);
+	} 
+     
+    //Ham them protypes
+    public function getProtypesByID($id)
+    {
+    	$sql ='SELECT * FROM protypes WHERE type_ID ="'.$id.'"';
+    	$result = self::$conn->query($sql);
+    	return $this->getData($result);
+    }
+    public function addProtypes ($name, $image)
+	{
+		$sql = 'INSERT INTO manufactures (type_name, type_img) VALUES ("'.$name.'","'.$image.'")';
+		return self::$conn->query($sql);
+	}
+	public function getProtypes()
+	{
+		$sql = "SELECT * FROM protypes";
+		$result = self::$conn->query($sql);
+		return $this->getData($result);
+	} 
+	public function editProtypes ($id, $name, $image)
+	{
+		$sql ='UPDATE protypes SET type_name="'.$name.'", type_image= "'.$image.'" WHERE type_ID="'.$id.'"';
+		return self::$conn->query($sql);
+	}  
+
+
+                      
 }
+
  ?>

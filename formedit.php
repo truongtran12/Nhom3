@@ -1,6 +1,11 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+include 'config.php';
+include 'db.php';
+$db = new Db();
+$manufactures = $db->getProduct();
+?>
+<!DOCTYPE php>
+<php lang="en">
 <head>
 	<title>Mobile Admin</title>
 	<meta charset="UTF-8" />
@@ -18,7 +23,7 @@
 
 <!--Header-part-->
 <div id="header">
-	<h1><a href="dashboard.html">Dashboard</a></h1>
+	<h1><a href="dashboard.php">Dashboard</a></h1>
 </div>
 <!--close-Header-part-->
 
@@ -29,9 +34,9 @@
 			<ul class="dropdown-menu">
 				<li><a href="#"><i class="icon-user"></i> My Profile</a></li>
 				<li class="divider"></li>
-				<li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
+				<li><a href="#"><i class="icon-check"></i>My Tasks</a></li>
 				<li class="divider"></li>
-				<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+				<li><a href="login.php"><i class="icon-key"></i>Log Out</a></li>
 			</ul>
 		</li>
 		<li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
@@ -46,13 +51,13 @@
 			</ul>
 		</li>
 		<li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-		<li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+		<li class=""><a title="" href="login.php"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
 	</ul>
 </div>
 
 <!--start-top-serch-->
 <div id="search">
-	<form action="result.html" method="get">
+	<form action="result.php" method="get">
 	<input type="text" placeholder="Search here..." name="key"/>
 	<button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </form>
@@ -63,13 +68,9 @@
 
 <div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-th"></i>Tables</a>
 	<ul>
-		<li><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-
-		<li> <a href="form.html"><i class="icon icon-th-list"></i> <span>Add New Product</span></a></li>
-		<li> <a href="manufactures.html"><i class="icon icon-th-list"></i> <span>Manufactures</span></a></li>
-
-
-
+		<li><a href="index.php"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+		<li> <a href="form.php"><i class="icon icon-th-list"></i> <span>Add New Product</span></a></li>
+		<li> <a href="manufactures.php"><i class="icon icon-th-list"></i> <span>Manufactures</span></a></li>
 	</ul>
 </div>
 
@@ -77,7 +78,7 @@
 <div id="content">
 	<div id="content-header">
 		<div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom current"><i class="icon-home"></i> Home</a></div>
-		<h1>Add New Product</h1>
+		<h1>Edit</h1>
 	</div>
 	<div class="container-fluid">
 		<hr>
@@ -92,25 +93,58 @@
 						<!-- BEGIN USER FORM -->
 						<form action="#" method="post" class="form-horizontal" enctype="multipart/form-data">
 							<div class="control-group">
-								<label class="control-label">Manufacture Name :</label>
+								<label class="control-label">Name :</label>
 								<div class="controls">
-									<input type="text" class="span11" placeholder="Manufacture name" name="manu_name" /> *
+									<input type="text" class="span11" placeholder="Product name" name="name" /> *
 								</div>
 							</div>
-
-	
 							<div class="control-group">
+								<label class="control-label">Choose a product type :</label>
+								<div class="controls">
+									<select name="type_id">
+										<option value="4">Speaker</option>
+										<option value="3">Laptop</option>
+										<option value="2">Tablet</option>
+										<option value="1">Cellphone</option>
+
+									</select> *
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">Choose a manufacture :</label>
+								<div class="controls">
+									<select name="manu_id">
+										<?php 
+											foreach ($manufactures as $value) {
+										 ?>
+										 <option value="<?php echo $value['manu_ID']?>"><?php echo $value['manu_name'] ?></option>
+										 <?php } ?>
+									</select> *
+								</div>
+								<div class="control-group">
 									<label class="control-label">Choose an image :</label>
 									<div class="controls">
 										<input type="file" name="fileUpload" id="fileUpload">
 									</div>
 								</div>
-	
+								<div class="control-group">
+									<label class="control-label">Description</label>
+									<div class="controls">
+										<textarea class="span11" placeholder="Description" name = "description"></textarea>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Price :</label>
+										<div class="controls">
+											<input type="text" class="span11" placeholder="price" name = "price" /> *
+										</div>
 
-								<div class="form-actions">
-									<button type="submit" class="btn btn-success">Add</button>
+									</div>
+
+								
+									<div class="form-actions">
+										<button type="submit" class="btn btn-success">Edit</button>
+									</div>
 								</div>
-							</div>
 
 						</form>
 						<!-- END USER FORM -->
@@ -124,6 +158,7 @@
 </div>
 
 <!-- END CONTENT -->
+
 <!--Footer-part-->
 <div class="row-fluid">
 	<div id="footer" class="span12"> 2017 &copy; TDC - Lập trình web 1</div>
@@ -138,4 +173,4 @@
 <script src="public/js/matrix.js"></script>
 <script src="public/js/matrix.tables.js"></script>
 </body>
-</html>
+</php>

@@ -109,7 +109,7 @@ session_start();
 								<td><?php echo $manufactures['manu_name']; ?></td>
 								<td><img src='public/manufactures/<?php echo $manufactures['manu_img'] ?>'>
 								<td>
-									<a href="#" class="btn btn-success btn-mini">Edit</a>
+									<a href="formedit.php" class="btn btn-success btn-mini">Edit</a>
 									<a href="#" class="btn btn-danger btn-mini">Delete</a>
 								</td>
 								<?php } ?>

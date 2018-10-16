@@ -1,3 +1,32 @@
+<?php 
+include 'config.php';
+include 'db.php';
+if(isset($_POST['addManufacture'])){
+$targetDir = "public/images/";
+		$targetFile = $targetDir.basename($_FILES["fileUpload"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = pathinfo($targetFile,PATHINFO_EXTENSION);
+		//Kiem tra dung file hinh khong		
+		$check = getimagesize($_FILES["fileUpload"]["tmp_name"]);
+		if($check !== false){
+		   $uploadOk = 1;
+			}else
+			  {
+				   	$uploadOk = 0;
+			}			
+			if($uploadOk == 0){
+			echo "Upload File khong thanh cong !";
+				}else{
+					$db = new Db();
+					if(move_uploaded_file($_FILES["fileUpload"]["tmp_name"],$targetFile) && $db->addManufacters($_POST['manu_name'],$_FILES["fileUpload"]["name"])){
+						echo "Thanh Cong !";
+						header("location:manufactures.php");
+					}else{
+						echo "That Bai !";
+					}
+	}
+}
+ ?>
 
 <!DOCTYPE php>
 <php lang="en">
@@ -90,7 +119,7 @@
 					<div class="widget-content nopadding">
 
 						<!-- BEGIN USER FORM -->
-						<form action="#" method="post" class="form-horizontal" enctype="multipart/form-data">
+						<form action="form_manufacture.php" method="post" class="form-horizontal" enctype="multipart/form-data">
 							<div class="control-group">
 								<label class="control-label">Manufacture Name :</label>
 								<div class="controls">
@@ -108,7 +137,7 @@
 	
 
 								<div class="form-actions">
-									<button type="submit" class="btn btn-success">Add</button>
+									<button type="submit" class="btn btn-success" name="addManufacture">Add</button>
 								</div>
 							</div>
 

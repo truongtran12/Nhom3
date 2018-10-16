@@ -1,4 +1,9 @@
-
+<?php 
+include 'config.php';
+include 'db.php';
+$db = new Db();
+$manufactures = $db->getManufactures();
+?>
 <!DOCTYPE php>
 <php lang="en">
 <head>
@@ -29,9 +34,9 @@
 			<ul class="dropdown-menu">
 				<li><a href="#"><i class="icon-user"></i> My Profile</a></li>
 				<li class="divider"></li>
-				<li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
+				<li><a href="#"><i class="icon-check"></i>My Tasks</a></li>
 				<li class="divider"></li>
-				<li><a href="login.php"><i class="icon-key"></i> Log Out</a></li>
+				<li><a href="login.php"><i class="icon-key"></i>Log Out</a></li>
 			</ul>
 		</li>
 		<li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
@@ -64,12 +69,8 @@
 <div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-th"></i>Tables</a>
 	<ul>
 		<li><a href="index.php"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-
 		<li> <a href="form.php"><i class="icon icon-th-list"></i> <span>Add New Product</span></a></li>
 		<li> <a href="manufactures.php"><i class="icon icon-th-list"></i> <span>Manufactures</span></a></li>
-
-
-
 	</ul>
 </div>
 
@@ -113,12 +114,11 @@
 								<label class="control-label">Choose a manufacture :</label>
 								<div class="controls">
 									<select name="manu_id">
-										<option value="5">Oppo</option>
-										<option value="4">SamSung</option>
-										<option value="3">Sony</option>
-										<option value="2">Microsoft</option>
-										<option value="1">Apple</option>
-
+										<?php 
+											foreach ($manufactures as $value) {
+										 ?>
+										 <option value="<?php echo $value['manu_ID']?>"><?php echo $value['manu_name'] ?></option>
+										 <?php } ?>
 									</select> *
 								</div>
 								<div class="control-group">
@@ -128,7 +128,7 @@
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label"  >Description</label>
+									<label class="control-label">Description</label>
 									<div class="controls">
 										<textarea class="span11" placeholder="Description" name = "description"></textarea>
 									</div>
